@@ -4,6 +4,7 @@ import com.kodilla.library.domain.Book;
 import com.kodilla.library.domain.BookStatus;
 import com.kodilla.library.domain.Title;
 import com.kodilla.library.repository.BookRepository;
+import com.kodilla.library.repository.TitleRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +16,7 @@ public class BookService {
 
     public final BookRepository bookRepository;
     public final TitleService titleService;
+    private final TitleRepository titleRepository;
 
     public Book saveBook(Book book) {
         Title tile =titleService.getTitleById(book.getTitle().getId());
@@ -28,7 +30,9 @@ public class BookService {
     }
 
     public long countAvailableBooks(Long titleId) {
-        return bookRepository.countByTitleAndStatus(titleId, BookStatus.AVAILABLE);
+        Title tile = titleRepository.findById(titleId)
+                .orElseThrow(() -> new RuntimeException("Title not found with id: " + titleId));
+        return bookRepository.countByTitleIdAndStatus(tile, BookStatus.AVAILABLE);
     }
 
     public List<Book> getAllBooks() {
@@ -36,7 +40,7 @@ public class BookService {
     }
 
     public Book getAvailableBook(Long titleId) {
-        return bookRepository.findFirstBytitleIdAndStatus(titleId, BookStatus.AVAILABLE)
+        return bookRepository.findFirstByTitleIdAndStatus(titleId, BookStatus.AVAILABLE)
                 .orElseThrow(() -> new RuntimeException("No available book"));
     }
 
