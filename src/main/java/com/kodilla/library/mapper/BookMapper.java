@@ -3,14 +3,21 @@ package com.kodilla.library.mapper;
 import com.kodilla.library.domain.Book;
 import com.kodilla.library.domain.BookDto;
 import com.kodilla.library.domain.Title;
+import com.kodilla.library.service.TitleService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class BookMapper {
 
-    public Book mapToBook(final BookDto dto, final Title title) {
+    private final TitleService titleService;
+
+    public Book mapToBook(final BookDto dto) {
+        Title title = titleService.getTitleById(dto.getTitleId());
+
         return new Book(
                 dto.getId(),
                 title,
