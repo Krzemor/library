@@ -10,6 +10,6 @@ import java.util.Optional;
 
 @Repository
 public interface BookRepository extends JpaRepository<Book, Long> {
-    long countByTitleIdAndStatus(Title title, BookStatus status);
+    long countByTitleIdAndStatus(Long titleId, BookStatus status);
     Optional<Book> findFirstByTitleIdAndStatus(Long titleId, BookStatus status);
 }

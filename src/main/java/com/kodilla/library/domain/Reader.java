@@ -29,4 +29,10 @@ public class Reader {
     @Column(name = "acc_created")
     private LocalDate accCreated;
 
+    //Constructor for tests
+    public Reader(String firstName, String lastName, LocalDate accCreated) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.accCreated = accCreated;
+    }
 }

@@ -32,7 +32,7 @@ public class BookService {
     public long countAvailableBooks(Long titleId) {
         Title tile = titleRepository.findById(titleId)
                 .orElseThrow(() -> new RuntimeException("Title not found with id: " + titleId));
-        return bookRepository.countByTitleIdAndStatus(tile, BookStatus.AVAILABLE);
+        return bookRepository.countByTitleIdAndStatus(tile.getId(), BookStatus.AVAILABLE);
     }
 
     public List<Book> getAllBooks() {

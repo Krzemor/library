@@ -24,4 +24,9 @@ public class Book {
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
     private BookStatus status;
+
+    public Book(Title title, BookStatus status) {
+        this.title = title;
+        this.status = status;
+    }
 }

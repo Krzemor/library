@@ -24,4 +24,10 @@ public class Title {
     @Column(name = "publication_year")
     private int publicationYear;
 
+    //Constructor for tests
+    public Title(String title, String author, int publicationYear) {
+        this.title = title;
+        this.author = author;
+        this.publicationYear = publicationYear;
+    }
 }
